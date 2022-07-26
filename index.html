@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css\main.css">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      window.onload = function() {
+        let link = document.createElement("link");
+        link.href = "css\iframe.css";      /**** your CSS file ****/
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        frames[0].document.head.appendChild(link); /**** 0 is an index of your iframe ****/
+      }
+    </script>
+    test
+    <div class="test">
+        <iframe src="https://demo.fireprobe.net/"></iframe>
+    </div>
+  </body>
+</html>

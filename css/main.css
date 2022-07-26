@@ -1,0 +1,11 @@
+iframe{
+  width: 350px;
+  height: 500px;
+  border: none;
+  overflow: hidden;
+}
+
+html{
+  background-color: #3B3B3B;
+  color: white;
+}
