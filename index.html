@@ -1,23 +1,300 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css\main.css">
-    <title></title>
-  </head>
-  <body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <title>
+        Puri Speed Test
+    </title>
+    <link rel="stylesheet" href="assets\css\main.css">
+    <meta name="description"
+        content="Test your Internet connection speed using this accurate tool from FireProbe.net platform." />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <script type="text/javascript" nonce="ffdf05c407524419b350d3def14"
+        src="//local.adguard.org?ts=1658864535563&amp;type=content-script&amp;dmn=demo.fireprobe.net&amp;pth=%2F&amp;app=msedge.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script>
+    <script type="text/javascript" nonce="ffdf05c407524419b350d3def14"
+        src="//local.adguard.org?ts=1658864535563&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script>
+    <link href="https://demo.fireprobe.net/resources/default/css/fireprobe.css?id=d41d8cd98f00b204e9800998ecf8427e"
+        rel="stylesheet" type="text/css" />
+    <link href="https://demo.fireprobe.net/font/Exo2-Mono.css?id=d41d8cd98f00b204e9800998ecf8427e" rel="stylesheet">
+    <script src="https://demo.fireprobe.net/resources/default/js/external.js?id=d41d8cd98f00b204e9800998ecf8427e"
+        type="text/javascript"></script>
+    <script src="https://demo.fireprobe.net/resources/default/js/fireprobe.js?id=d41d8cd98f00b204e9800998ecf8427e"
+        type="text/javascript"></script>
+    <script
+        src="https://demo.fireprobe.net/resources/default/js/fireprobe.graphics.js?id=d41d8cd98f00b204e9800998ecf8427e"
+        type="text/javascript"></script>
     <script type="text/javascript">
-      window.onload = function() {
-        let link = document.createElement("link");
-        link.href = "css\iframe.css";      /**** your CSS file ****/
-        link.rel = "stylesheet";
-        link.type = "text/css";
-        frames[0].document.head.appendChild(link); /**** 0 is an index of your iframe ****/
-      }
+        var url = 'https://demo.fireprobe.net/';
+        var fpCustom = '[]';
     </script>
-    test
-    <div class="test">
-        <iframe src="https://demo.fireprobe.net/"></iframe>
+</head>
+<body>
+    <div id="tester-wrapper">
+        <div id="fireprobe" class="tfr">
+            <a target="_blank" href="https://www.fireprobe.net" class="name">
+                <img src="assets\images\logo.png"/>
+            </a>
+
+            <div id="tester">
+                <canvas id="start-canvas" width="500" height="500">
+                    <p></p>
+                </canvas>
+                <div class="start">
+                    <div class="text tfr">
+                        START
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div id="server">
+                    <canvas id="server-canvas" width="36" height="36"></canvas>
+                    <div class="server spacer">
+                        <span class="title">
+                            Searching for best server...
+                        </span>
+                        <span class="value"></span>
+                    </div>
+                </div>
+
+                <div class="ip spacer">
+                    <span class="title">
+                        IP:
+                    </span>
+                    <span class="value">...</span>
+                </div>
+
+                <div class="isp spacer tfr">
+                    <span class="title">
+                        provider:
+                    </span>
+                    <span class="value">...</span>
+                </div>
+                <div class="powered">
+                    <span class="title">powered by </span>
+                    <span class="value">
+                        <a target="_blank" href="https://puri.zone/"
+                            title="Get FIREPROBE speed test free HTML5 app for your website">
+                            PuriDevs
+                        </a>
+                    </span>
+                </div>
+                <canvas id="testing-mode-canvas" width="100" height="100"></canvas>
+                <div class="testing-mode">
+                    <span class="title tfr">
+                        Testing:
+                    </span>
+                    <br />
+                    <span class="value tfr">
+                        Ping
+                    </span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="current result">
+                    <div class="current-result value">
+                        <span class="value-1 tfr">...</span>
+                        <br />
+                        <span class="value-2 tfr">Mb/s</span>
+                    </div>
+                </div>
+                <div class="download result">
+                    <div class="download-label label tfr">
+                        Download:
+                    </div>
+                    <div class="download-result value">
+                        <span class="value-1 tfr">...</span>
+                        <span class="value-2 tfr">Mb/s</span>
+                    </div>
+                </div>
+                <canvas id="download-chart-canvas" width="250" height="100"></canvas>
+                <div class="upload result">
+                    <div class="upload-label label tfr">
+                        Upload:
+                    </div>
+                    <div class="upload-result value">
+                        <span class="value-1 tfr">...</span>
+                        <span class="value-2 tfr">Mb/s</span>
+                    </div>
+                </div>
+                <canvas id="upload-chart-canvas" width="250" height="100"></canvas>
+                <div class="ping result">
+                    <div class="ping-label label tfr">
+                        Ping:
+                    </div>
+                    <div class="ping-result value">
+                        <span class="value-1 tfr">...</span>
+                        <span class="value-2 tfr">ms</span>
+                    </div>
+                </div>
+                <div class="jitter result">
+                    <div class="jitter-label label tfr">
+                        Jitter:
+                    </div>
+                    <div class="jitter-result value">
+                        <span class="value-1 tfr">...</span>
+                        <span class="value-2 tfr">ms</span>
+                    </div>
+                </div>
+                <canvas id="gauge-canvas" width="1100" height="850"></canvas>
+                <canvas id="gauge-canvas-2" width="1100" height="850"></canvas>
+                <a href="#" id="restart" class="tfr">RESTART</a>
+                <a href="#" id="share" class="tfr">SHARE</a>
+                <a href="#" id="approve" class="tfr">APPROVE</a>
+                <div class="select-server-wrapper-dummy"></div>
+                <div class="select-server-wrapper">
+                    <div class="title tfr">SELECT SERVER</div>
+                    <canvas id="server-select-close-canvas" width="36" height="36"></canvas>
+                    <br />
+                    <div id="select-server" class="select-server scrollbar-inner">
+                        <div class="s-server server-empty">
+                            <canvas class="server-canvas" width="36" height="36"></canvas>
+                            <div class="server-info">
+                                <div class="server-name tfr"></div>
+                                <div class="server-loc tfr"></div>
+                            </div>
+                            <div class="server-latency tfr">
+                                <span class="value-1"></span>
+                                <span class="value-2"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-wrapper">
+                    <div class="icon web s5">
+                        <div class="image"></div>
+                        <div class="wrapper">
+                            <div class="text tfr">
+                                <span class="title">
+                                    WEB BROWSING:
+                                </span>
+                                <span class="value">
+                                    <span class="value-1">5</span>/<span class="value-2">5</span>
+                                </span>
+                            </div>
+                            <div class="bar-wrapper">
+                                <div class="bar bar-1"></div>
+                                <div class="bar bar-2"></div>
+                                <div class="bar bar-3"></div>
+                                <div class="bar bar-4"></div>
+                                <div class="bar bar-5"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="icon stream-lq s4">
+                        <div class="image"></div>
+                        <div class="wrapper">
+                            <div class="text tfr">
+                                <span class="title">
+                                    VIDEO STREAMING (LQ):
+                                </span>
+                                <span class="value">
+                                    <span class="value-1">5</span>/<span class="value-2">5</span>
+                                </span>
+                            </div>
+                            <div class="bar-wrapper">
+                                <div class="bar bar-1"></div>
+                                <div class="bar bar-2"></div>
+                                <div class="bar bar-3"></div>
+                                <div class="bar bar-4"></div>
+                                <div class="bar bar-5"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="icon stream-hq s3">
+                        <div class="image"></div>
+                        <div class="wrapper">
+                            <div class="text tfr">
+                                <span class="title">
+                                    VIDEO STREAMING (HQ):
+                                </span>
+                                <span class="value">
+                                    <span class="value-1">5</span>/<span class="value-2">5</span>
+                                </span>
+                            </div>
+                            <div class="bar-wrapper">
+                                <div class="bar bar-1"></div>
+                                <div class="bar bar-2"></div>
+                                <div class="bar bar-3"></div>
+                                <div class="bar bar-4"></div>
+                                <div class="bar bar-5"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="icon calls s2">
+                        <div class="image"></div>
+                        <div class="wrapper">
+                            <div class="text tfr">
+                                <span class="title">
+                                    CALLS (SKYPE, WHATSAPP):
+                                </span>
+                                <span class="value">
+                                    <span class="value-1">5</span>/<span class="value-2">5</span>
+                                </span>
+                            </div>
+                            <div class="bar-wrapper">
+                                <div class="bar bar-1"></div>
+                                <div class="bar bar-2"></div>
+                                <div class="bar bar-3"></div>
+                                <div class="bar bar-4"></div>
+                                <div class="bar bar-5"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="icon games s1">
+                        <div class="image"></div>
+                        <div class="wrapper">
+                            <div class="text tfr">
+                                <span class="title">
+                                    ON-LINE GAMES:
+                                </span>
+                                <span class="value">
+                                    <span class="value-1">5</span>/<span class="value-2">5</span>
+                                </span>
+                            </div>
+                            <div class="bar-wrapper">
+                                <div class="bar bar-1"></div>
+                                <div class="bar bar-2"></div>
+                                <div class="bar bar-3"></div>
+                                <div class="bar bar-4"></div>
+                                <div class="bar bar-5"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <a class="mad"></a>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <script type="text/javascript">
+        var fireprobe;
+        $(document).ready(function () {
+
+            fireprobe = new fireProbeApp('https://www.fireprobe.net/api/gateway', '76', logger.INFO);
+
+
+            fireprobe.initialize();
+        });
+
+        function fireProbeEvent(data) {
+        }
+
+        function fireProbeStats(data) {
+        }
+
+    </script>
+</body>
 </html>
